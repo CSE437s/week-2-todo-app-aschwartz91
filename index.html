@@ -1,0 +1,152 @@
+<!--
+A. Schwartz
+1/23/24
+index.html - this file contains the logic and setup for the to do website
+ -->
+
+
+
+ <!DOCTYPE html>
+ <html lang = "en">
+ <head>
+    <meta charset = "utf-8">
+    <title>TO DO</title>
+    <link rel = "stylesheet" type = "text/css" href = "style.css">
+    <script src="script.js"></script>
+ </head>
+     <body>
+         <h1 style="text-align:center">Let's get sh!t done.</h1>
+
+
+         
+    <h2 id = "lblCreateTask">Add a task:</h2>
+    <div id =  "newToDo" class = "container">
+        <form id = "createTask">
+            <input id = "txtCreateToDo" type = "text" placeholder = "ex. buy groceries">
+            <input id = "btnCreateToDo" type = "submit" value = "add">
+        </form>
+           
+    </div>
+    
+    <div id = "toDoList">
+        <ul id = "list"></ul>
+    </div>
+         
+
+ <script>
+
+    function buildList() {
+        console.log("test");
+        event.preventDefault();
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var todos = JSON.parse(this.responseText);
+                var list = document.getElementById("list");
+                
+                while (list.hasChildNodes()){
+                    list.removeChild(list.lastChild);
+                }
+
+                for (var i = 0; i < todos.length; i++){
+                    var li = document.createElement("li");
+                    li.setAttribute("id", todos[i].id);
+                    var checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    text = document.createTextNode(todos[i].text);
+                    text.id = todos[i].id;
+                    li.addEventListener("change", update);
+                    var delButton = document.createElement("delButton");
+                    delButton.innerHTML = "delete";
+                    delButton.setAttribute("style", "color: red; background-color: darkgrey; margin: 15px; border-radius: 5px;");
+                    delButton.id = todos[i].id;
+                    delButton.addEventListener("click", delet);
+                    
+
+                    //cross out completed list items
+                    if (todos[i].completed == true){
+                            li.style.textDecoration = "line-through";
+                    }
+                    else {
+                        //uncross out if they aren't completed
+                        li.style.textDecoration = "none";
+                    }
+                    list.appendChild(li);
+                    li.appendChild(checkbox);
+                    li.appendChild(text);
+                    li.appendChild(delButton);
+                    
+                }
+            }
+        };
+
+        xhttp.open("GET", "https://cse204.work/todos", true);
+        xhttp.setRequestHeader("x-api-key","fc94e3-4c919f-4936da-c06e7c-9e7d26");
+        xhttp.send();
+    }
+    //fc94e3-4c919f-4936da-c06e7c-9e7d26
+    //use to create and access fields of each ToDo
+
+    function create() {
+        event.preventDefault();
+        var data = {text: document.getElementById("txtCreateToDo").value}
+        var xhttp = new XMLHttpRequest();
+        
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                buildList();
+
+                //reset the text box so user can add more
+                document.getElementById("txtCreateToDo").value = "";
+            }
+        };
+
+        xhttp.open("POST", "https://cse204.work/todos", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.setRequestHeader("x-api-key","fc94e3-4c919f-4936da-c06e7c-9e7d26");
+        xhttp.send(JSON.stringify(data));
+    }
+
+    
+
+        
+
+        function delet() {
+            event.preventDefault();
+            var xhttp = new XMLHttpRequest();
+
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    buildList();
+                }
+            };
+            xhttp.open("DELETE", "https://cse204.work/todos/"+event.target.id, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.setRequestHeader("x-api-key","fc94e3-4c919f-4936da-c06e7c-9e7d26");
+            xhttp.send();
+        }
+
+        function update(event) {
+            var c_id = event.target.parentNode.id;
+            data = {completed: true};       
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById(c_id).style.textDecoration="line-through";
+                }
+            };
+            xhttp.open("PUT", "https://cse204.work/todos/"+c_id, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.setRequestHeader("x-api-key","fc94e3-4c919f-4936da-c06e7c-9e7d26");
+            xhttp.send(JSON.stringify(data));
+        }
+        
+        document.addEventListener("DOMContentLoaded", list);
+        document.getElementById("createTask").addEventListener("submit", create, false);
+         </script>
+     </body>
+  </html>
+ 
+ 

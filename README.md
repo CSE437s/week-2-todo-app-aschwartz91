@@ -28,7 +28,7 @@ This assignment challenges you to design and build a simple to-do application us
 
 ### I'm Totally Lost and Afraid:
 
-- **HTML/CSS/JavaScript:** Use these and build something pretty.
+- **HTML/CSS/JavaScript:** Use these and build something pretty.`
 
 ### I'm Afraid of Databases, but have FE Familiarity:
 

@@ -1,0 +1,99 @@
+/*
+A. Schwartz
+1/23/24
+style.css - this css file stylizes the wonderful to do app
+*/
+
+
+@font-face {
+    font-family: 'Glober';
+    src: url('fonts/glober/glober.otf') format('opentype');
+    font-weight: normal;
+}
+
+
+body {
+    /*found this online, wanted to add a cool background
+ all content sourced from codepen.io background generator*/
+    font-family: 'Glober', sans-serif;
+	background: linear-gradient(-45deg, #0037ea, #ed7d7d, #fffc63);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	height: 200vh;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+#lblCreateTask {
+    text-align: center;
+    position: relative;
+}
+
+/*#newToDo{
+    position: relative;
+    
+    left: 41.2%;
+    width: 25%;
+    font-size: 18px;
+    padding: 6px;
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: rgb(230, 209, 182);
+    
+}*/
+.container {
+    display: flex;        /* Enables flexbox */
+    justify-content: center; /* Centers items horizontally in the container */
+    align-items: center;     /* Centers items vertically (if you need it) */
+    flex-direction: column;  /* Stacks items vertically */
+    width: 100%;             /* Full width of the container */
+    height: 100vh;           /* Full height of the viewport */
+}
+
+/* Optional: Additional styling for the textbox and button */
+#textbox, #button {
+    margin: 10px; /* Adds space around the textbox and button */
+}
+
+
+h1 {
+    font-size: 5em;
+}
+
+h2 {
+    font-size: 2em;
+}
+input {
+    background: rgb(206, 227, 233);
+}
+
+#txtCreateToDo{
+    font-size: 20px;
+}
+
+#toDoList{
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    color: black;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 26px;
+    display: inline-block; 
+	text-align: left; 
+}
+
+::-webkit-input-placeholder {
+    font-style: italic;
+ }
+ 
