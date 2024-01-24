@@ -22,7 +22,7 @@ index.html - this file contains the logic and setup for the to do website
     <h2 id = "lblCreateTask">Add a task:</h2>
     <div id =  "newToDo" class = "container">
         <form id = "createTask">
-            <input id = "txtCreateToDo" type = "text" placeholder = "ex. buy groceries">
+            <input id = "txtCreateToDo" type = "text" placeholder = "ex. conquer the world">
             <input id = "btnCreateToDo" type = "submit" value = "add">
         </form>
            
@@ -52,14 +52,54 @@ index.html - this file contains the logic and setup for the to do website
                 for (var i = 0; i < todos.length; i++){
                     var li = document.createElement("li");
                     li.setAttribute("id", todos[i].id);
+                    
                     var checkbox = document.createElement("input");
                     checkbox.type = "checkbox";
-                    text = document.createTextNode(todos[i].text);
+
+                    var textWrapper = document.createElement("span"); // or "div"
+                    textWrapper.classList.add("to-do-label");
+                    var text = document.createTextNode(todos[i].text);
+                    textWrapper.appendChild(text);
+
+                    //text = document.createTextNode(todos[i].text);
                     text.id = todos[i].id;
                     li.addEventListener("change", update);
                     var delButton = document.createElement("delButton");
                     delButton.innerHTML = "delete";
-                    delButton.setAttribute("style", "color: red; background-color: darkgrey; margin: 15px; border-radius: 5px;");
+                    //delButton.setAttribute("style", "color: red; background-color: darkgrey; margin: 15px; border-radius: 5px;");
+                    delButton.setAttribute("style", `
+                        color: white; 
+                        background-color: #d9534f; /* Bootstrap 'btn-danger' color */
+                        padding: 10px 20px;
+                        margin: 15px; 
+                        border-radius: 8px; 
+                        border: 1px solid #d43f3a; /* Slightly darker shade for border */
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        cursor: pointer;
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                        transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+                    `);
+
+                    delButton.addEventListener("mouseover", function() {
+                        this.style.backgroundColor = "#c9302c"; /* Darker shade for hover */
+                        this.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+                    });
+
+                    delButton.addEventListener("mouseout", function() {
+                        this.style.backgroundColor = "#d9534f";
+                        this.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.1)";
+                    });
+
+                    delButton.addEventListener("mousedown", function() {
+                        this.style.transform = "scale(0.95)";
+                    });
+
+                    delButton.addEventListener("mouseup", function() {
+                        this.style.transform = "scale(1)";
+                    });
+
+                    //intead
                     delButton.id = todos[i].id;
                     delButton.addEventListener("click", delet);
                     
@@ -74,7 +114,7 @@ index.html - this file contains the logic and setup for the to do website
                     }
                     list.appendChild(li);
                     li.appendChild(checkbox);
-                    li.appendChild(text);
+                    li.appendChild(textWrapper);
                     li.appendChild(delButton);
                     
                 }
