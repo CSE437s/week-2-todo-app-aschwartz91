@@ -1,5 +1,6 @@
 I used the base of my to-do app from Web Dev last year so I could focus mainly on front-end improvements. I did improve functionality significantly with having crossed out items stay crossed out. Mainly this was a great exercise for me to use CSS and explore how I could build the best possible UI and look. ChatGPT was incredibly helpful for many of these UI improvements. I have an HCI minor so I wanted to lean more into the design.
 
+https://week-2-todo-app-aschwartz91.vercel.app/
 
 
 
