@@ -55,23 +55,28 @@ index.html - this file contains the logic and setup for the to do website
                     
                     var checkbox = document.createElement("input");
                     checkbox.type = "checkbox";
+                    checkbox.style.marginRight = "25px"; // Add this line
+
+                    if (todos[i].completed == true){
+                        checkbox.checked = true;    
+                        li.style.textDecoration = "line-through";
+                    }
 
                     var textWrapper = document.createElement("span"); // or "div"
                     textWrapper.classList.add("to-do-label");
                     var text = document.createTextNode(todos[i].text);
                     textWrapper.appendChild(text);
-
-                    //text = document.createTextNode(todos[i].text);
                     text.id = todos[i].id;
+                    
                     li.addEventListener("change", update);
                     var delButton = document.createElement("delButton");
+                    delButton.className = "delButton";
                     delButton.innerHTML = "delete";
-                    //delButton.setAttribute("style", "color: red; background-color: darkgrey; margin: 15px; border-radius: 5px;");
                     delButton.setAttribute("style", `
                         color: white; 
                         background-color: #d9534f; /* Bootstrap 'btn-danger' color */
                         padding: 10px 20px;
-                        margin: 15px; 
+                        margin: 20px; 
                         border-radius: 8px; 
                         border: 1px solid #d43f3a; /* Slightly darker shade for border */
                         font-weight: bold;
@@ -106,10 +111,12 @@ index.html - this file contains the logic and setup for the to do website
 
                     //cross out completed list items
                     if (todos[i].completed == true){
-                            li.style.textDecoration = "line-through";
+                        checkbox.checked = true;    
+                        li.style.textDecoration = "line-through";
                     }
                     else {
                         //uncross out if they aren't completed
+                        checkbox.checked = false;
                         li.style.textDecoration = "none";
                     }
                     list.appendChild(li);
@@ -168,7 +175,7 @@ index.html - this file contains the logic and setup for the to do website
         }
 
         function update(event) {
-            var c_id = event.target.parentNode.id;
+            /*var c_id = event.target.parentNode.id;
             data = {completed: true};       
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
@@ -178,6 +185,25 @@ index.html - this file contains the logic and setup for the to do website
                 }
             };
             xhttp.open("PUT", "https://cse204.work/todos/"+c_id, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.setRequestHeader("x-api-key","fc94e3-4c919f-4936da-c06e7c-9e7d26");
+            xhttp.send(JSON.stringify(data));*/
+
+            var checkbox = event.target;
+            var li = checkbox.parentNode;
+            var c_id = li.id;
+            var isCompleted = checkbox.checked;
+
+            // Prepare data based on the checkbox status
+            var data = {completed: isCompleted};       
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Toggle the textDecoration based on the checkbox status
+                    li.style.textDecoration = isCompleted ? "line-through" : "none";
+                }
+            };
+            xhttp.open("PUT", "https://cse204.work/todos/" + c_id, true);
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.setRequestHeader("x-api-key","fc94e3-4c919f-4936da-c06e7c-9e7d26");
             xhttp.send(JSON.stringify(data));

@@ -67,6 +67,7 @@ body {
 
 h1 {
     font-size: 5em;
+    margin-bottom:10px;
 }
 
 h2 {
@@ -82,17 +83,37 @@ input {
     border-radius: 10px;
 }
 
-#txtCreateToDo{
-    font-size: 20px;
+.checkbox-container {
+    /* Styling for the checkbox container */
+    padding-right: 50px; /* Add horizontal spacing */
 }
 
 #toDoList{
     text-align: center;
 }
 
-#btnCreateToDo{
-    width: 70px;
+#txtCreateToDo, #btnCreateToDo {
+    height: 40px; /* Adjust to your preference */
+    font-size: 16px; /* Adjust to match your design */
+    padding: 0 10px; /* Provides padding inside the elements */
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Subtle border */
+    margin: 0 5px; /* Space between elements */
 }
+
+#btnCreateToDo {
+    background-color: #28a745; /* A cool green shade */
+    color: #ffffff; /* White text color */
+    line-height: 38px; /* Aligns text in the center, adjust as needed */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    border: 1px solid  #218838;
+}
+
+#btnCreateToDo:hover {
+    background-color: #218838; /* Slightly darker green on hover */
+}
+
 ul {
     list-style-type: none;
     color: black;
@@ -115,6 +136,7 @@ ul {
 
 .to-do-label:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8); /* Subtle shadow on hover */
+    background-color: #b0b0b0;
 }
 
 
@@ -122,3 +144,13 @@ ul {
     font-style: italic;
  }
  
+ li {
+    display: flex;
+    justify-content: space-between; /* Aligns items to both ends */
+    align-items: center; /* Aligns items vertically in the center */
+    margin-bottom: 8px; /* Adjust as needed for vertical spacing */
+}
+ 
+ .delButton {
+     margin-left: auto;
+ }

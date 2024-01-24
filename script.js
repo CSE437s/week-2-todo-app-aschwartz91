@@ -4,8 +4,6 @@ A. Schwartz
 script.js - this js file powers the backend of the to do app
 */
 
-
-
 var xhttp = new XMLHttpRequest();
 //var httpRequest = prepare("http");
 
@@ -62,3 +60,4 @@ xhttp2.open("GET", "https://cse204.work/todos/" + id, true);
 xhttp2.setRequestHeader("Content-type", "application/json");
 xhttp2.setRequestHeader("x-api-key", "fc94e3-4c919f-4936da-c06e7c-9e7d26");
 xhttp2.send(JSON.stringify(data));
+
